@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Promo Délice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9f4;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2c7a7b;
+    }
+
+    .promo-box {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+    }
+
+    button {
+      background-color: #38a169;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #2f855a;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #2d3748;
+    }
+
+    input {
+      padding: 8px;
+      width: 80px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: center;
+    }
+   
+  </style>
+</head>
+<body>
+    <a href="index.html"><==Retour</a>       
+  <h1>Pourquoi choisir Délice ?</h1>
+      <divn class="gratuit"><p> Pour une commende de < 200 > la livreson est gratuit</p></div>
+
+  <div class="promo-box">
+    <p>👉 Cliquez ci-dessous pour voir le nombre de produits achetés et les réductions disponibles.</p>
+    
+    <label for="quantite">Nombre de boissons :</label><br>
+    <input type="number" id="quantite" placeholder="ex: 20"><br>
+
+    <button onclick="calculerReduction()">Voir la réduction</button>
+
+    <div class="result" id="resultat"></div>
+  </div>
+
+  <script>
+    function calculerReduction() {
+      const prixUnitaire = 100;
+      const quantite = parseInt(document.getElementById("quantite").value);
+      const resultat = document.getElementById("resultat");
+
+      if (isNaN(quantite) || quantite <= 0) {
+        resultat.textContent = "Veuillez entrer un nombre valide.";
+        return;
+      }
+
+      let total = prixUnitaire * quantite;
+      let reduction = 0;
+
+      if (quantite >= 20) {
+        reduction = total * 0.5;
+        total = total - reduction;
+        resultat.innerHTML = `
+          ✅ Vous avez droit à une réduction de 50% !<br>
+          Montant à payer : <strong>${total} F</strong> au lieu de ${prixUnitaire * quantite} F.
+        `;
+      } else {
+        resultat.innerHTML = `
+          Aucun rabais pour moins de 20 boissons.<br>
+          Montant à payer : <strong>${total} F</strong>.
+        `;
+      }
+    }
+  </script>
+
+</body>
+</html>
